@@ -26,6 +26,7 @@ class Menu extends Component{
                     <ListItem.Content>
                         <ListItem.Title>{item.name}</ListItem.Title>
                         <ListItem.Subtitle>{item.description}</ListItem.Subtitle>
+                        
                     </ListItem.Content>
                     
                 </ListItem>

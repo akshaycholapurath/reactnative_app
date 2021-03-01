@@ -8,7 +8,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import ContactUs from './ContactUs';
 import AboutUs from './AboutUs';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator,TransitionSpecs  } from '@react-navigation/stack';
+import { Icon } from 'react-native-elements';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
 
 
 const DishStack = createStackNavigator();
@@ -21,7 +24,7 @@ function DishStackScreen() {
             headerTintColor: 'white',
             headerStyle: { backgroundColor: 'tomato' },
           }}>
-        <DishStack.Screen name="Menu" component={Menu} />
+        <DishStack.Screen name="Menu" component={Menu}  />
         <DishStack.Screen name="DishDetail" component={DishDetail} />
     </DishStack.Navigator>
   );
@@ -37,10 +40,30 @@ class Main extends Component {
         return(
         <NavigationContainer>
             <Tab.Navigator initialRouteName="Home">
-                    <Tab.Screen name="Home" component={Home} />
-                    <Tab.Screen name="Menu" component={DishStackScreen} />
-                    <Tab.Screen name="Contact Us" component={ContactUs} />
-                    <Tab.Screen name="AboutUs" component={AboutUs} />
+                    <Tab.Screen name="Home" component={Home} options={{
+                        tabBarLabel: 'Home',
+                        tabBarIcon: ({ color, size }) => (
+                          <MaterialCommunityIcons name="home" color="black" size={size} />
+                        ),
+                      }}/>
+                    <Tab.Screen name="Menu" component={DishStackScreen} options={{
+                        tabBarLabel: 'Menu',
+                        tabBarIcon: ({ color, size }) => (
+                          <Icon name="menu" color="black" size={size} />
+                        ),
+                      }} />
+                    <Tab.Screen name="Contact Us" component={ContactUs} options={{
+                        tabBarLabel: 'Contact',
+                        tabBarIcon: ({ color, size }) => (
+                          <MaterialCommunityIcons name="account" color="black" size={size} />
+                        ),
+                      }}/>
+                    <Tab.Screen name="AboutUs" component={AboutUs} options={{
+                        tabBarLabel: 'About Us',
+                        tabBarIcon: ({ color, size }) => (
+                          <MaterialCommunityIcons name="bell" color="black" size={size} />
+                        ),
+                      }} />
             </Tab.Navigator>
         </NavigationContainer>
        )
