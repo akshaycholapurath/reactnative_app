@@ -1,8 +1,10 @@
 import React,{Component} from 'react';
 import { View, FlatList,Text } from 'react-native';
-import { ListItem,Avatar } from 'react-native-elements';
+import { ListItem,Avatar,Card } from 'react-native-elements';
 import {connect} from 'react-redux';
 import {baseUrl} from '../shared/baseUrl';
+import {Loading} from './LoadingComponent';
+
 
 const mapStateToProps = state =>{
     return {
@@ -30,7 +32,20 @@ class Menu extends Component{
                 </ListItem>
             );
         }
-        
+    
+    if (this.props.dishes.isLoading){
+        return(
+            <Card>
+                <Loading />
+            </Card>
+        )
+    } else if(this.props.dishes.errMess){
+        return(
+            <View>
+                <Card><Text>{this.props.dishes.errMess}</Text></Card>
+            </View>
+        )
+    }else {
 
     return (
             <FlatList 
@@ -40,6 +55,7 @@ class Menu extends Component{
                 />
     );
     }
+}
 }
 
 
