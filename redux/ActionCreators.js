@@ -121,8 +121,8 @@ export const fetchLeaders = () => (dispatch) => {
             }
         },
         error => {
-            var errMess = new Error(error.message)
-            throw errMess;
+            var errmess = new Error(error.message)
+            throw errmess;
         })
         .then(response=> response.json())
         .then(leaders=> dispatch(addLeaders(leaders)))
@@ -133,9 +133,9 @@ export const leadersLoading = () =>({
     type:ActionTypes.LEADERS_LOADING
 });
 
-export const leadersFailed = (errMess) =>({
+export const leadersFailed = (errmess) =>({
     type:ActionTypes.LEADERS_FAILED,
-    payload: errMess
+    payload: errmess
 });
 
 export const addLeaders = (leaders) =>({

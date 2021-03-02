@@ -1,7 +1,15 @@
 import React, {Component} from 'react';
 import { ScrollView,FlatList, Text} from 'react-native';
 import { ListItem,Card,Avatar } from 'react-native-elements';
-import {LEADERS} from '../shared/leaders';
+import {connect} from 'react-redux';
+import {baseUrl} from '../shared/baseUrl';
+
+
+const mapStateToProps = state =>{
+    return {
+        leaders:state.leaders
+    }
+}
 
 
 function RenderHistory (){
@@ -22,7 +30,7 @@ const RenderLeaderDetail = ({item, index}) => {
 
     return (
         <ListItem bottomDivider >
-            <Avatar source={require("./images/alberto.png")} />
+            <Avatar source={{uri: baseUrl+ item.image }} />
             <ListItem.Content>
                 <ListItem.Title>{item.name}</ListItem.Title>
                 <ListItem.Subtitle>{item.description}</ListItem.Subtitle>
@@ -40,9 +48,9 @@ const RenderLeaders = ({leaders})=>{
                 <Card.Divider/>                  
                 <Text style={{margin:10}}>
                     <FlatList 
-                    data={leaders}
-                    renderItem={RenderLeaderDetail}
-                    keyExtractor={(item, index) => index.toString()}
+                        data={leaders}
+                        renderItem={RenderLeaderDetail}
+                        keyExtractor={(item, index) => index.toString()}
                     />    
                 </Text>
         </Card>
@@ -50,22 +58,15 @@ const RenderLeaders = ({leaders})=>{
 }
 
 class AboutUs extends Component {
-    constructor(props){
-        super(props);
-        this.state={
-            leaders:LEADERS
-        }
-
-    }
-
+   
     render(){
     return(
         <ScrollView>
             <RenderHistory />
-            <RenderLeaders leaders={this.state.leaders} />
+            <RenderLeaders leaders={this.props.leaders.leaders} />
         </ScrollView>
     );
     }
 }
 
-export default AboutUs;
+export default connect(mapStateToProps)(AboutUs);

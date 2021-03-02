@@ -11,7 +11,24 @@ import AboutUs from './AboutUs';
 import { createStackNavigator,TransitionSpecs  } from '@react-navigation/stack';
 import { Icon } from 'react-native-elements';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {connect} from 'react-redux';
+import {fetchDishes,fetchComments,fetchPromos,fetchLeaders} from '../redux/ActionCreators';
 
+const mapStateToProps = state =>{
+    return {
+      dishes: state.dishes,
+      comments: state.comments,
+      promotions: state.promotions,
+      leaders: state.leaders
+    }
+}
+
+const mapDispatchToProps = dispatch => ({
+  fetchDishes: ()=> dispatch(fetchDishes()),
+  fetchComments: ()=> dispatch(fetchComments()),
+  fetchPromos: ()=> dispatch(fetchPromos()),
+  fetchLeaders: ()=> dispatch(fetchLeaders())
+});
 
 
 const DishStack = createStackNavigator();
@@ -35,7 +52,14 @@ const Tab = createBottomTabNavigator();
 
 
 class Main extends Component {
-         
+    
+    componentDidMount(){
+      this.props.fetchDishes();
+      this.props.fetchComments();
+      this.props.fetchLeaders();
+      this.props.fetchPromos();
+    }
+
     render(){
         return(
         <NavigationContainer>
@@ -71,4 +95,4 @@ class Main extends Component {
 
 }
 
-export default Main;
+export default connect(mapStateToProps,mapDispatchToProps)(Main);
