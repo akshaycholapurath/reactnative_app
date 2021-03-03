@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { View, Text,ScrollView,StyleSheet,Switch,Button,Modal} from 'react-native';
-import { Card ,ListItem,Icon} from 'react-native-elements';
+import { Card ,ListItem,Icon,Input} from 'react-native-elements';
 import {Picker} from '@react-native-picker/picker';
 import { TextInput } from 'react-native-gesture-handler';
 
@@ -17,8 +17,8 @@ class Reservation extends Component{
 
     handleReservation =() =>{
         console.log(JSON.stringify(this.state));
-        this.toggleModal();    
-        console.log(JSON.stringify(this.state));
+        this.resetForm();    
+
     }
 
     toggleModal(){
@@ -62,8 +62,7 @@ class Reservation extends Component{
                         </Switch>                
                     </View>
                     <View style={styles.formRow}>
-                        <Text style={styles.formLabel}>Date and Time</Text>
-                         <TextInput></TextInput>        
+                         <Input placeholder="Date and Time" onChangeText={(value)=>this.setState({date:value})}/>       
                     </View>
                     <View style={styles.formRow}>
                       <Button
