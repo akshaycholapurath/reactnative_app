@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { View, Text,ScrollView,Image} from 'react-native';
+import { View, Text,ScrollView,Image,StyleSheet} from 'react-native';
 import { Card ,ListItem,Icon} from 'react-native-elements';
 import {connect} from 'react-redux';
 import {baseUrl} from '../shared/baseUrl';
@@ -33,13 +33,24 @@ const RenderDish=(props)=>{
                     <Text style={{margin:10}}>
                         {dish.description}
                     </Text>
-                    <Icon
-                        raised
-                        reverse
-                        name={props.favorite? "heart":"heart-o"}
-                        type='font-awesome'
-                        color='#f50'
-                        onPress={()=>props.favorite?console.log("Already Favorite") : props.onPress()} />
+                    <View style={styles.formRow}>
+                        <Icon
+                            raised
+                            reverse
+                            name={props.favorite? "heart":"heart-o"}
+                            type='font-awesome'
+                            color='#f50'
+                            onPress={()=>props.favorite?console.log("Already Favorite") : props.onPress()} />
+
+                        <Icon
+                            raised
+                            reverse
+                            name="pencil"
+                            type='font-awesome'
+                            color='purple'
+                            />
+                    </View>
+                    
                 </Card>            
         );
     }else{
@@ -94,5 +105,14 @@ class Dishdetail extends Component{
         );
     }
 }
+
+const styles = StyleSheet.create({
+    formRow:{
+        alignItems:'center',
+        justifyContent:'center',
+        flex:1,
+        flexDirection:'row',
+        margin:20
+    }});
 
 export default connect(mapStateToProps,mapDispatchToProps)(Dishdetail);

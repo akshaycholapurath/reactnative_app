@@ -13,6 +13,7 @@ import { Icon } from 'react-native-elements';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {connect} from 'react-redux';
 import {fetchDishes,fetchComments,fetchPromos,fetchLeaders} from '../redux/ActionCreators';
+import Reservation from './ReservationComponent';
 
 const mapStateToProps = state =>{
     return {
@@ -86,6 +87,12 @@ class Main extends Component {
                         tabBarLabel: 'About Us',
                         tabBarIcon: ({ color, size }) => (
                           <MaterialCommunityIcons name="bell" color="black" size={size} />
+                        ),
+                      }} />
+                      <Tab.Screen name="Reservation" component={Reservation} options={{
+                        tabBarLabel: 'Reservation',
+                        tabBarIcon: ({ color, size }) => (
+                          <MaterialCommunityIcons name="note" color="black" size={size} />
                         ),
                       }} />
             </Tab.Navigator>
