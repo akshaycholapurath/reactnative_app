@@ -14,6 +14,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import {connect} from 'react-redux';
 import {fetchDishes,fetchComments,fetchPromos,fetchLeaders} from '../redux/ActionCreators';
 import Reservation from './ReservationComponent';
+import Favorite from './FavoriteComponent';
 
 const mapStateToProps = state =>{
     return {
@@ -77,12 +78,18 @@ class Main extends Component {
                           <Icon name="menu" color="black" size={size} />
                         ),
                       }} />
-                    <Tab.Screen name="Contact Us" component={ContactUs} options={{
+                    <Tab.Screen name="Favorite" component={Favorite} options={{
+                        tabBarLabel: 'Favorite',
+                        tabBarIcon: ({ color, size }) => (
+                          <MaterialCommunityIcons name="heart" color="black" size={size} />
+                        ),
+                      }}/>
+                    {/* <Tab.Screen name="Contact Us" component={ContactUs} options={{
                         tabBarLabel: 'Contact',
                         tabBarIcon: ({ color, size }) => (
                           <MaterialCommunityIcons name="account" color="black" size={size} />
                         ),
-                      }}/>
+                      }}/> */}
                     <Tab.Screen name="AboutUs" component={AboutUs} options={{
                         tabBarLabel: 'About Us',
                         tabBarIcon: ({ color, size }) => (

@@ -1,11 +1,9 @@
 import React, {Component} from 'react';
-import { View,Button, Text,ScrollView,Image,StyleSheet,TextInput,TouchableOpacity} from 'react-native';
+import { View,Button, Text,ScrollView,Image,StyleSheet,PanResponder} from 'react-native';
 import { Card ,ListItem,Icon,Rating, Input} from 'react-native-elements';
 import {connect} from 'react-redux';
 import {baseUrl} from '../shared/baseUrl';
 import {postFavorite,postComment} from '../redux/ActionCreators';
-import {Picker} from '@react-native-picker/picker';
-import { Field, reduxForm } from 'redux-form'
 
 
 const mapStateToProps = state =>{
@@ -25,9 +23,28 @@ const mapDispatchToProps = dispatch =>({
 const RenderDish=(props)=>{
     const dish = props.dish;
 
+    const recognizeDrag = ({moveX,moveY,dx,dy})=>{
+        if(dx <-200)
+            return true;
+        else 
+            return false;
+    }
+
+    const panResponder = PanResponder.create({
+        onStartShouldSetPanResponder:(e,gestureState)=>{
+            return true;
+        },
+        onPanResponderEnd: (e,gestureState)=>{
+            if(recognizeDrag(gestureState)){
+                props.favorite ? console.log('Already favorite') : props.onPress()
+            }
+            return true;
+        }
+    });
+
     if (dish != null ){
-        return(      
-                <Card >
+        return( 
+                <Card {...panResponder.panHandlers}>
                     <Card.Title>{dish.name}</Card.Title>
                     <Card.Image
                     resizeMode="cover"
@@ -49,7 +66,7 @@ const RenderDish=(props)=>{
                         
                     </View>
                     
-                </Card>            
+                </Card>                   
         );
     }else{
         return(
