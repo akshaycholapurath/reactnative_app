@@ -3,7 +3,7 @@ import { View,Button, Text,ScrollView,Image,StyleSheet,PanResponder} from 'react
 import { Card ,ListItem,Icon,Rating, Input} from 'react-native-elements';
 import {connect} from 'react-redux';
 import {baseUrl} from '../shared/baseUrl';
-import {postFavorite,postComment} from '../redux/ActionCreators';
+import {postFavorite,postComment,deleteFavorite} from '../redux/ActionCreators';
 
 
 const mapStateToProps = state =>{
@@ -15,6 +15,7 @@ const mapStateToProps = state =>{
 }
 
 const mapDispatchToProps = dispatch =>({
+    deleteFavorite:(dishId)=> dispatch(deleteFavorite(dishId)),
     postFavorite:(dishId)=>dispatch(postFavorite(dishId)),
     postComment:(dishId, rating, comment, author)=>dispatch(postComment(dishId, rating, comment, author))
 });
@@ -36,7 +37,7 @@ const RenderDish=(props)=>{
         },
         onPanResponderEnd: (e,gestureState)=>{
             if(recognizeDrag(gestureState)){
-                props.favorite ? console.log('Already favorite') : props.onPress()
+                props.favorite ? props.unmark() : console.log('Already deleted')
             }
             return true;
         }
@@ -117,6 +118,10 @@ class Dishdetail extends Component{
         this.props.postFavorite(dishId)
     }
 
+    unmarkFavorite = (dishId)=>{
+        this.props.deleteFavorite(dishId)
+    }
+
     resetState(){
         this.setState({
                 rating: 0,
@@ -137,7 +142,7 @@ class Dishdetail extends Component{
     return(
         <ScrollView>
             <RenderDish dish={this.props.dishes.dishes[+dishId]} favorite={this.props.favorites.some(el=> el ===dishId)}
-            onPress={()=> this.markFavorite(dishId)}/>
+            onPress={()=> this.markFavorite(dishId)} unmark={()=>this.unmarkFavorite(dishId)}/>
 
             <Card>
                 <Card.Title>Add Comments</Card.Title>

@@ -18,8 +18,8 @@ const mapDispatchToProps = dispatch =>({
     deleteFavorite:(dishId)=> dispatch(deleteFavorite(dishId))
 });
 
-const RenderFavorite = ({item})=>{
-
+const RenderFavorite = (props)=>{
+    const item = props.item;
     return(
             <ListItem key={item.id} bottomDivider >
                 <Avatar source={{uri: baseUrl + item.image}} />
@@ -33,7 +33,7 @@ const RenderFavorite = ({item})=>{
                     name="remove"
                     type='font-awesome'
                     color='red' 
- 
+                    onPress={()=>props.unmark()}
                     />        
             </ListItem>
     )
@@ -54,7 +54,7 @@ class Favorite extends Component {
             <Card.Title>FAVORITES</Card.Title>
                 <FlatList 
                     data={this.props.dishes.dishes.filter(dish=>this.props.favorite.some(el=>el===dish.id))}
-                    renderItem={({ item }) =><RenderFavorite item={item} />}
+                    renderItem={({ item }) =><RenderFavorite item={item} unmark={()=>this.deleteFavoriteHandle(item.id)} />}
                     keyExtractor={(item, index) => index.toString()}
                     extraData={this.props} 
                     />
