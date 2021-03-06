@@ -15,6 +15,7 @@ import {connect} from 'react-redux';
 import {fetchDishes,fetchComments,fetchPromos,fetchLeaders} from '../redux/ActionCreators';
 import Reservation from './ReservationComponent';
 import Favorite from './FavoriteComponent';
+import Login from './LoginComponent';
 
 const mapStateToProps = state =>{
     return {
@@ -49,6 +50,23 @@ function DishStackScreen() {
   );
 }
 
+const LoginStack = createStackNavigator();
+
+function LoginStackScreen(){
+  return(
+    <LoginStack.Navigator
+      initialRouteName="Login"
+          screenOptions={{
+              headerTintColor: 'white',
+              headerStyle: { backgroundColor: 'black' },
+            }}>
+      <LoginStack.Screen name="Login" component={Login}  />      
+      <LoginStack.Screen name="Home" component={Home}  />      
+
+    </LoginStack.Navigator>
+  )
+}
+
 
 const Tab = createBottomTabNavigator();
 
@@ -65,13 +83,14 @@ class Main extends Component {
     render(){
         return(
         <NavigationContainer>
-            <Tab.Navigator initialRouteName="Home">
-                    <Tab.Screen name="Home" component={Home} options={{
-                        tabBarLabel: 'Home',
+            <Tab.Navigator initialRouteName="Login">
+                    <Tab.Screen name="Login" component={LoginStackScreen} options={{
+                        tabBarLabel: 'Login',
                         tabBarIcon: ({ color, size }) => (
-                          <MaterialCommunityIcons name="home" color="black" size={size} />
+                          <MaterialCommunityIcons name="login" color="black" size={size} />
                         ),
                       }}/>
+                    
                     <Tab.Screen name="Menu" component={DishStackScreen} options={{
                         tabBarLabel: 'Menu',
                         tabBarIcon: ({ color, size }) => (

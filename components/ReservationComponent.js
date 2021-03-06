@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { View, Text,ScrollView,StyleSheet,Switch,Button,Modal} from 'react-native';
 import { Card ,ListItem,Icon,Input} from 'react-native-elements';
 import {Picker} from '@react-native-picker/picker';
-import { TextInput } from 'react-native-gesture-handler';
+import {Permissions,Notifications} from 'expo-notifications';
 
 class Reservation extends Component{
     constructor(props){
@@ -17,8 +17,8 @@ class Reservation extends Component{
 
     handleReservation =() =>{
         console.log(JSON.stringify(this.state));
+        // this.presentLocalNotification(this.state.date);
         this.resetForm();    
-
     }
 
     toggleModal(){
@@ -33,6 +33,30 @@ class Reservation extends Component{
         });
     }
 
+    // async obtainNotificationPermission(){
+    //     let permission = await Permissions.getAsync(Permissions.USER_FACING_NOTIFICATIONS);
+    //     if (permission.status !=='granted'){
+    //         permission = await Permissions.askAsync(Permissions.USER_FACING_NOTIFICATIONS);
+    //         if(permission.status != 'granted'){
+    //             console.log("permission not granted")
+    //         }
+    //     } 
+    //     return permission;
+    // }
+
+    // async presentLocalNotification(date){
+    //     await this.obtainNotificationPermission();
+    //     Notifications.presentLocalNotificationAsync({
+    //         title:'Your Reservation',
+    //         body:'Reserved For Date' + date,
+    //         ios:{
+    //             sound: true
+    //         },
+    //         android:{
+    //             sound:true
+    //         }
+    //     })
+    // }
 
     render(){
         return(
