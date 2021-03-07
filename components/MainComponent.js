@@ -103,18 +103,18 @@ class Main extends Component {
                           <MaterialCommunityIcons name="heart" color="black" size={size} />
                         ),
                       }}/>
-                    {/* <Tab.Screen name="Contact Us" component={ContactUs} options={{
+                    <Tab.Screen name="Contact Us" component={ContactUs} options={{
                         tabBarLabel: 'Contact',
                         tabBarIcon: ({ color, size }) => (
                           <MaterialCommunityIcons name="account" color="black" size={size} />
                         ),
-                      }}/> */}
-                    <Tab.Screen name="AboutUs" component={AboutUs} options={{
+                      }}/>
+                    {/* <Tab.Screen name="AboutUs" component={AboutUs} options={{
                         tabBarLabel: 'About Us',
                         tabBarIcon: ({ color, size }) => (
                           <MaterialCommunityIcons name="bell" color="black" size={size} />
                         ),
-                      }} />
+                      }} /> */}
                       <Tab.Screen name="Reservation" component={Reservation} options={{
                         tabBarLabel: 'Reservation',
                         tabBarIcon: ({ color, size }) => (

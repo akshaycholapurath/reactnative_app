@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { View,Button, Text,ScrollView,Image,StyleSheet,PanResponder} from 'react-native';
+import { View,Button, Text,ScrollView,Image,StyleSheet,PanResponder,Share} from 'react-native';
 import { Card ,ListItem,Icon,Rating, Input} from 'react-native-elements';
 import {connect} from 'react-redux';
 import {baseUrl} from '../shared/baseUrl';
@@ -43,6 +43,16 @@ const RenderDish=(props)=>{
         }
     });
 
+    const shareDish = (title,message,url) =>{
+        Share.share({
+            title:title,
+            message: `${title} : ${message} ${url} `,
+            url: url
+        },{
+            dialogTitle: "Share " + title
+        });
+    }
+
     if (dish != null ){
         return( 
                 <Card {...panResponder.panHandlers}>
@@ -63,8 +73,13 @@ const RenderDish=(props)=>{
                             type='font-awesome'
                             color='#f50'
                             onPress={()=>props.favorite?console.log("Already Favorite") : props.onPress()} />
-
-                        
+                        <Icon
+                            raised
+                            reverse
+                            name='share'
+                            type='font-awesome'
+                            color='#51D2A8'
+                            onPress={()=>shareDish(dish.name, dish.description, baseUrl + dish.image) }/>                   
                     </View>
                     
                 </Card>                   

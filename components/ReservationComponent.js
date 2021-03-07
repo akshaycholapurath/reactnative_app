@@ -2,7 +2,10 @@ import React, {Component} from 'react';
 import { View, Text,ScrollView,StyleSheet,Switch,Button,Modal} from 'react-native';
 import { Card ,ListItem,Icon,Input} from 'react-native-elements';
 import {Picker} from '@react-native-picker/picker';
-import {Permissions,Notifications} from 'expo-notifications';
+// import * as Permissions from 'expo-permissions';
+// import * as Notifications from 'expo-notifications';
+
+
 
 class Reservation extends Component{
     constructor(props){
@@ -11,7 +14,6 @@ class Reservation extends Component{
             guests:1,
             smoking: false,
             date:'',
-            showModal:false
         }
     }
 
@@ -48,14 +50,9 @@ class Reservation extends Component{
     //     await this.obtainNotificationPermission();
     //     Notifications.presentLocalNotificationAsync({
     //         title:'Your Reservation',
-    //         body:'Reserved For Date' + date,
-    //         ios:{
-    //             sound: true
-    //         },
-    //         android:{
-    //             sound:true
-    //         }
-    //     })
+    //         body:'Reserved For Date' + date
+            
+    //     });
     // }
 
     render(){
